@@ -16,6 +16,8 @@
     border-top: none;
     margin-top: 0;
     padding-top: 2rem;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .bluesky-feed-container {
