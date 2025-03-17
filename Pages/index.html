@@ -532,82 +532,32 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h3 style="color: white; margin-bottom: 1.5rem; padding-left: 15px;"><i class="fas fa-cloud"></i> Latest from BlueSky</h3>
-                </div>
-            </div>
-            <div class="row" id="bluesky-feed-container">
-                <!-- BlueSky feed content will be loaded here by script -->
-            </div>
-            <div class="row">
-                <div class="col-12 text-center mt-3">
-                    <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" style="color: #C6953B; text-decoration: none;">View All Posts <i class="fas fa-external-link-alt"></i></a>
+                    <div id="bluesky-feed"></div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Load the BlueSky feed script -->
     <script>
         // Determine if we're on GitHub Pages or local environment
         const isGitHubPages = window.location.hostname.includes('github.io') || window.location.hostname.includes('nocomozi.github.io');
         const basePath = isGitHubPages ? '/VIWeb-live' : '';
         
-        // Create the BlueSky feed content
-        document.addEventListener('DOMContentLoaded', function() {
-            const feedContainer = document.getElementById('bluesky-feed-container');
-            
-            // Sample posts data
-            const posts = [
-                {
-                    author: 'Voices Ignited',
-                    handle: '@voicesignited.bsky.social',
-                    content: 'Join us this weekend as we unite to demand transparency in government spending! Together, our voices are stronger. <span style="color: #C6953B;">#VoicesIgnited</span> <span style="color: #C6953B;">#Accountability</span>',
-                    image: `${basePath}/images/protestors.jpg`,
-                    likes: 42,
-                    reposts: 18
-                },
-                {
-                    author: 'Voices Ignited',
-                    handle: '@voicesignited.bsky.social',
-                    content: 'Our mission transcends political divisions. We\'re focused on empowering citizens to stand against corruption and hold officials accountable. <span style="color: #C6953B;">#IntegrityMatters</span>',
-                    image: `${basePath}/images/rps5RoMG.jpg`,
-                    likes: 37,
-                    reposts: 15
-                },
-                {
-                    author: 'Voices Ignited',
-                    handle: '@voicesignited.bsky.social',
-                    content: 'When we stand together against corruption, we create a government that truly represents the people. Join our movement today! <span style="color: #C6953B;">#VoicesIgnited</span> <span style="color: #C6953B;">#PeoplePower</span>',
-                    image: `${basePath}/images/protestors.jpg`,
-                    likes: 61,
-                    reposts: 32
-                }
-            ];
-            
-            // Create post cards
-            posts.forEach(post => {
-                const postCard = document.createElement('div');
-                postCard.className = 'col-md-4 mb-4 px-4';
-                postCard.innerHTML = `
-                    <div style="background-color: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; height: 100%; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <img src="${basePath}/images/vi_logo_white.jpg" alt="Voices Ignited" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                            <div>
-                                <div style="font-weight: 600; font-size: 0.9rem;">${post.author}</div>
-                                <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.7);">${post.handle}</div>
-                            </div>
-                        </div>
-                        <p>${post.content}</p>
-                        <img src="${post.image}" alt="Post image" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; color: rgba(255, 255, 255, 0.7);">
-                            <div><i class="far fa-heart"></i> ${post.likes}</div>
-                            <div><i class="fas fa-retweet"></i> ${post.reposts}</div>
-                            <div><i class="far fa-comment"></i></div>
-                        </div>
-                    </div>
-                `;
-                feedContainer.appendChild(postCard);
-            });
-        });
+        // Dynamically load the CSS
+        const blueskyCSS = document.createElement('link');
+        blueskyCSS.rel = 'stylesheet';
+        blueskyCSS.href = `${basePath}/styles/bluesky-feed.css`;
+        document.head.appendChild(blueskyCSS);
+        
+        // Dynamically load the script
+        const blueskyScript = document.createElement('script');
+        blueskyScript.src = `${basePath}/scripts/bluesky-feed.js`;
+        blueskyScript.onload = function() {
+            // Initialize the BlueSky feed once the script is loaded
+            new BlueSkyFeed('bluesky-feed');
+        };
+        document.body.appendChild(blueskyScript);
     </script>
 
     <!-- Footer -->
@@ -645,16 +595,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome for icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <!-- BlueSky Feed Script -->
-    <script>
-        // This script handles both local and GitHub Pages environments
-        var pathSegments = window.location.pathname.split('/');
-        var repoName = pathSegments[1] === 'VIWeb-live' ? '/VIWeb-live' : '';
-        
-        // Dynamically create script element
-        var script = document.createElement('script');
-        script.src = repoName + '/scripts/bluesky-feed.js';
-        document.body.appendChild(script);
-    </script>
 </body>
 </html>
