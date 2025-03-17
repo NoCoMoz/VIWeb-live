@@ -44,6 +44,10 @@ class BlueSkyFeed {
   render() {
     this.container.innerHTML = `
       <div class="bluesky-feed-container">
+        <div class="feed-header">
+          <h3><i class="fas fa-cloud"></i> Latest from BlueSky</h3>
+          <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" class="view-all-link">View All <i class="fas fa-external-link-alt"></i></a>
+        </div>
         <div id="${this.containerId}-content" class="feed-content">
           <div class="loading-container">
             <div class="loading-icon">
@@ -88,60 +92,70 @@ class BlueSkyFeed {
         author: {
           displayName: 'Voices Ignited',
           handle: 'voicesignited.bsky.social',
-          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+          avatar: '/VIWeb-live/images/vi_logo_white.jpg'
         },
         content: 'Join us this weekend as we unite to demand transparency in government spending! Together, our voices are stronger. #VoicesIgnited #Accountability',
         createdAt: '2025-03-15T14:30:00Z',
         likes: 42,
-        reposts: 18
+        reposts: 18,
+        image: '/VIWeb-live/images/protestors.jpg',
+        imageAlt: 'People holding signs at a protest for government transparency'
       },
       {
         id: 'post2',
         author: {
           displayName: 'Voices Ignited',
           handle: 'voicesignited.bsky.social',
-          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+          avatar: '/VIWeb-live/images/vi_logo_white.jpg'
         },
         content: 'Our mission transcends political divisions. We\'re focused on empowering citizens to stand against corruption and hold officials accountable. #IntegrityMatters',
         createdAt: '2025-03-14T18:15:00Z',
         likes: 37,
-        reposts: 15
+        reposts: 15,
+        image: '/VIWeb-live/images/rps5RoMG.jpg',
+        imageAlt: 'People working together at a community meeting'
       },
       {
         id: 'post3',
         author: {
           displayName: 'Voices Ignited',
           handle: 'voicesignited.bsky.social',
-          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+          avatar: '/VIWeb-live/images/vi_logo_white.jpg'
         },
         content: 'Thank you to everyone who participated in yesterday\'s community forum! Your insights on improving local governance were invaluable. #CommunityEngagement #Democracy',
         createdAt: '2025-03-13T09:45:00Z',
         likes: 29,
-        reposts: 8
+        reposts: 8,
+        image: '/VIWeb-live/images/community-forum.jpg',
+        imageAlt: 'Community forum with diverse participants discussing local issues'
       },
       {
         id: 'post4',
         author: {
           displayName: 'Voices Ignited',
           handle: 'voicesignited.bsky.social',
-          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+          avatar: '/VIWeb-live/images/vi_logo_white.jpg'
         },
         content: 'New blog post: "5 Ways to Hold Your Representatives Accountable" - practical steps every citizen can take to ensure government works for the people. Link in bio! #Advocacy #CitizenPower',
         createdAt: '2025-03-12T16:20:00Z',
         likes: 53,
-        reposts: 24
+        reposts: 24,
+        image: '/VIWeb-live/images/blog-post.jpg',
+        imageAlt: 'Person writing in a notebook with a laptop nearby'
       },
       {
         id: 'post5',
         author: {
           displayName: 'Voices Ignited',
           handle: 'voicesignited.bsky.social',
-          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+          avatar: '/VIWeb-live/images/vi_logo_white.jpg'
         },
         content: 'When we stand together against corruption, we create a government that truly represents the people. Join our movement today! #VoicesIgnited #PeoplePower',
         createdAt: '2025-03-11T11:10:00Z',
         likes: 61,
-        reposts: 32
+        reposts: 32,
+        image: '/VIWeb-live/images/people-power.jpg',
+        imageAlt: 'Diverse group of people with raised hands in unity'
       }
     ];
 
@@ -174,8 +188,15 @@ class BlueSkyFeed {
       // Format hashtags with the brand color
       const formattedContent = post.content.replace(/#(\w+)/g, '<span class="hashtag">#$1</span>');
       
+      // Image HTML if available
+      const imageHTML = post.image ? `
+        <div class="post-image">
+          <img src="${post.image}" alt="${post.imageAlt || 'Post image'}" loading="lazy">
+        </div>
+      ` : '';
+      
       return `
-        <div class="post" id="${post.id}">
+        <div class="post-card" id="${post.id}">
           <div class="post-header">
             <div class="post-avatar">
               <img src="${post.author.avatar}" alt="${post.author.displayName}" />
@@ -187,6 +208,7 @@ class BlueSkyFeed {
             <div class="post-date">${this.formatDate(post.createdAt)}</div>
           </div>
           <div class="post-content">${formattedContent}</div>
+          ${imageHTML}
           <div class="post-actions">
             <div class="post-action like">
               <i class="far fa-heart"></i>
@@ -207,18 +229,12 @@ class BlueSkyFeed {
       `;
     }).join('');
     
-    // Add header
-    const feedHTML = `
-      <div class="feed-header">
-        <h3><i class="fas fa-cloud"></i> Latest from BlueSky</h3>
-        <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" class="view-all-link">View All <i class="fas fa-external-link-alt"></i></a>
-      </div>
+    // Add posts to container
+    this.contentContainer.innerHTML = `
       <div class="posts-container">
         ${postsHTML}
       </div>
     `;
-    
-    this.contentContainer.innerHTML = feedHTML;
     
     // Add event listeners for post interactions
     this.addPostInteractions();
