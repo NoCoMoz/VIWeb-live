@@ -1,7 +1,7 @@
 /**
  * BlueSky Feed Component
  * 
- * This script fetches and displays BlueSky posts on the Voices Ignited website.
+ * This script displays static BlueSky posts on the Voices Ignited website.
  * It follows the official color palette and design guidelines.
  */
 
@@ -35,7 +35,7 @@ class BlueSkyFeed {
    */
   init() {
     this.render();
-    this.fetchPosts();
+    this.displaySamplePosts();
   }
   
   /**
@@ -78,162 +78,176 @@ class BlueSkyFeed {
   }
   
   /**
-   * Fetch posts from the BlueSky API
+   * Display sample posts for static sites like GitHub Pages
    */
-  async fetchPosts() {
-    try {
-      // Fetch posts from our API endpoint
-      const response = await fetch('/api/bluesky');
-      
-      if (!response.ok) {
-        throw new Error(`Failed to fetch posts: ${response.status} ${response.statusText}`);
+  displaySamplePosts() {
+    // Sample posts that match the Voices Ignited brand voice
+    const samplePosts = [
+      {
+        id: 'post1',
+        author: {
+          displayName: 'Voices Ignited',
+          handle: 'voicesignited.bsky.social',
+          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+        },
+        content: 'Join us this weekend as we unite to demand transparency in government spending! Together, our voices are stronger. #VoicesIgnited #Accountability',
+        createdAt: '2025-03-15T14:30:00Z',
+        likes: 42,
+        reposts: 18
+      },
+      {
+        id: 'post2',
+        author: {
+          displayName: 'Voices Ignited',
+          handle: 'voicesignited.bsky.social',
+          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+        },
+        content: 'Our mission transcends political divisions. We\'re focused on empowering citizens to stand against corruption and hold officials accountable. #IntegrityMatters',
+        createdAt: '2025-03-14T18:15:00Z',
+        likes: 37,
+        reposts: 15
+      },
+      {
+        id: 'post3',
+        author: {
+          displayName: 'Voices Ignited',
+          handle: 'voicesignited.bsky.social',
+          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+        },
+        content: 'Thank you to everyone who participated in yesterday\'s community forum! Your insights on improving local governance were invaluable. #CommunityEngagement #Democracy',
+        createdAt: '2025-03-13T09:45:00Z',
+        likes: 29,
+        reposts: 8
+      },
+      {
+        id: 'post4',
+        author: {
+          displayName: 'Voices Ignited',
+          handle: 'voicesignited.bsky.social',
+          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+        },
+        content: 'New blog post: "5 Ways to Hold Your Representatives Accountable" - practical steps every citizen can take to ensure government works for the people. Link in bio! #Advocacy #CitizenPower',
+        createdAt: '2025-03-12T16:20:00Z',
+        likes: 53,
+        reposts: 24
+      },
+      {
+        id: 'post5',
+        author: {
+          displayName: 'Voices Ignited',
+          handle: 'voicesignited.bsky.social',
+          avatar: '/VIWeb-live/images/white-logo.76c7025e.png'
+        },
+        content: 'When we stand together against corruption, we create a government that truly represents the people. Join our movement today! #VoicesIgnited #PeoplePower',
+        createdAt: '2025-03-11T11:10:00Z',
+        likes: 61,
+        reposts: 32
       }
-      
-      const data = await response.json();
-      
-      if (!Array.isArray(data)) {
-        throw new Error('Invalid response format from BlueSky API');
-      }
-      
-      // Limit the number of posts
-      const posts = data.slice(0, this.options.postLimit);
-      
-      // Render the posts
-      this.renderPosts(posts);
-    } catch (error) {
-      console.error('Error fetching BlueSky posts:', error);
-      this.renderError(error.message);
-    }
+    ];
+
+    // Render the posts
+    this.renderPosts(samplePosts);
   }
   
   /**
-   * Render posts in the feed
+   * Render posts to the feed
    * @param {Array} posts - Array of post objects
    */
   renderPosts(posts) {
-    if (posts.length === 0) {
+    if (!this.contentContainer) return;
+    
+    // Clear loading indicator
+    this.contentContainer.innerHTML = '';
+    
+    if (!posts || posts.length === 0) {
       this.contentContainer.innerHTML = `
-        <div class="empty-state">
+        <div class="no-posts-message">
           <p>No posts available at this time.</p>
+          <p>Follow us on <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank">BlueSky</a>!</p>
         </div>
       `;
       return;
     }
     
-    let postsHTML = '<div class="posts-container">';
-    
-    posts.forEach((post) => {
-      // Truncate text if it's too long for horizontal layout
-      const truncatedText = post.text.length > 120 
-        ? post.text.substring(0, 120) + '...' 
-        : post.text;
+    // Create post elements
+    const postsHTML = posts.map(post => {
+      // Format hashtags with the brand color
+      const formattedContent = post.content.replace(/#(\w+)/g, '<span class="hashtag">#$1</span>');
       
-      // Check if post has images
-      const hasImages = post.images && post.images.length > 0;
-      const imageHTML = hasImages ? `
-        <div class="post-image-container">
-          <img 
-            src="${post.images[0].url}" 
-            alt="${post.images[0].alt || 'Post image'}" 
-            class="post-image"
-            loading="lazy"
-          />
-        </div>
-      ` : '';
-        
-      postsHTML += `
-        <div class="bluesky-post">
+      return `
+        <div class="post" id="${post.id}">
           <div class="post-header">
-            <div class="author-info">
-              <div class="display-name">${post.author.displayName}</div>
-              <div class="handle">@${post.author.handle}</div>
+            <div class="post-avatar">
+              <img src="${post.author.avatar}" alt="${post.author.displayName}" />
+            </div>
+            <div class="post-author">
+              <div class="post-author-name">${post.author.displayName}</div>
+              <div class="post-author-handle">@${post.author.handle}</div>
             </div>
             <div class="post-date">${this.formatDate(post.createdAt)}</div>
           </div>
-          ${imageHTML}
-          <div class="post-content">${truncatedText}</div>
-          <div class="post-footer">
-            <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="view-post-link">
-              View on BlueSky <i class="fas fa-external-link-alt"></i>
-            </a>
+          <div class="post-content">${formattedContent}</div>
+          <div class="post-actions">
+            <div class="post-action like">
+              <i class="far fa-heart"></i>
+              <span>${post.likes}</span>
+            </div>
+            <div class="post-action repost">
+              <i class="fas fa-retweet"></i>
+              <span>${post.reposts}</span>
+            </div>
+            <div class="post-action reply">
+              <i class="far fa-comment"></i>
+            </div>
+            <div class="post-action share">
+              <i class="far fa-share-square"></i>
+            </div>
           </div>
         </div>
       `;
-    });
+    }).join('');
     
-    postsHTML += '</div>';
-    this.contentContainer.innerHTML = postsHTML;
-    
-    // Add scroll buttons if there are many posts
-    if (posts.length > 3) {
-      this.addScrollButtons();
-    }
-  }
-  
-  /**
-   * Add scroll buttons to navigate the horizontal feed
-   */
-  addScrollButtons() {
-    const container = this.contentContainer.querySelector('.posts-container');
-    if (!container) return;
-    
-    // Create scroll buttons container
-    const scrollButtonsContainer = document.createElement('div');
-    scrollButtonsContainer.className = 'scroll-buttons';
-    
-    // Create left scroll button
-    const leftButton = document.createElement('button');
-    leftButton.className = 'scroll-button scroll-left';
-    leftButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    leftButton.addEventListener('click', () => {
-      container.scrollBy({ left: -350, behavior: 'smooth' });
-    });
-    
-    // Create right scroll button
-    const rightButton = document.createElement('button');
-    rightButton.className = 'scroll-button scroll-right';
-    rightButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    rightButton.addEventListener('click', () => {
-      container.scrollBy({ left: 350, behavior: 'smooth' });
-    });
-    
-    // Add buttons to container
-    scrollButtonsContainer.appendChild(leftButton);
-    scrollButtonsContainer.appendChild(rightButton);
-    
-    // Add buttons container after the posts container
-    container.parentNode.insertBefore(scrollButtonsContainer, container.nextSibling);
-  }
-  
-  /**
-   * Render error message
-   * @param {string} message - Error message to display
-   */
-  renderError(message) {
-    this.contentContainer.innerHTML = `
-      <div class="error-container">
-        <div class="error-message">${message || 'Failed to load posts'}</div>
-        <button class="retry-button" id="${this.containerId}-retry">
-          Try Again
-        </button>
+    // Add header
+    const feedHTML = `
+      <div class="feed-header">
+        <h3><i class="fas fa-cloud"></i> Latest from BlueSky</h3>
+        <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" class="view-all-link">View All <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="posts-container">
+        ${postsHTML}
       </div>
     `;
     
-    // Add retry event listener
-    const retryButton = document.getElementById(`${this.containerId}-retry`);
-    if (retryButton) {
-      retryButton.addEventListener('click', () => {
-        this.contentContainer.innerHTML = `
-          <div class="loading-container">
-            <div class="loading-icon">
-              <i class="fas fa-spinner fa-spin"></i>
-            </div>
-            <div class="loading-text">Loading posts...</div>
-          </div>
-        `;
-        this.fetchPosts();
+    this.contentContainer.innerHTML = feedHTML;
+    
+    // Add event listeners for post interactions
+    this.addPostInteractions();
+  }
+  
+  /**
+   * Add interactive elements to posts
+   */
+  addPostInteractions() {
+    // Like button interaction
+    const likeButtons = this.contentContainer.querySelectorAll('.post-action.like');
+    likeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const icon = button.querySelector('i');
+        const count = button.querySelector('span');
+        
+        if (icon.classList.contains('far')) {
+          icon.classList.remove('far');
+          icon.classList.add('fas');
+          icon.style.color = '#C6953B'; // Gold from the brand palette
+          count.textContent = parseInt(count.textContent) + 1;
+        } else {
+          icon.classList.remove('fas');
+          icon.classList.add('far');
+          icon.style.color = '';
+          count.textContent = parseInt(count.textContent) - 1;
+        }
       });
-    }
+    });
   }
 }
 
