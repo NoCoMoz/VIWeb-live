@@ -1,0 +1,117 @@
+/* Upcoming Events Styles */
+.upcoming-events {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  color: #3F2A56; /* Dark Purple */
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.events-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .events-list {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+.event-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #59978A; /* Teal */
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.event-title {
+  color: #3F2A56; /* Dark Purple */
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.event-type {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  background-color: #59978A; /* Teal */
+}
+
+.event-type.protest {
+  background-color: #C6953B; /* Gold */
+}
+
+.event-type.workshop {
+  background-color: #4F6070; /* Slate Blue */
+}
+
+.event-type.meeting {
+  background-color: #632863; /* Purple */
+}
+
+.event-description {
+  color: #4F6070; /* Slate Blue */
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.event-details {
+  margin-bottom: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #4F6070; /* Slate Blue */
+}
+
+.detail-item svg {
+  margin-right: 0.75rem;
+  color: #59978A; /* Teal */
+  width: 16px;
+}
+
+.event-organizer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #4F6070; /* Slate Blue */
+}
+
+.event-image {
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.no-events {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voices Ignited</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/Background.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        /* Header styles */
+        .navbar {
+            background: linear-gradient(to bottom, 
+                rgba(63, 42, 86, 0.95) 0%,
+                rgba(63, 42, 86, 0.85) 50%,
+                rgba(63, 42, 86, 0.75) 100%) !important;
+            padding: 1rem 0;
+        }
+
+        .navbar .container {
+            padding: 0;
+            max-width: 100%;
+            margin: 0 30px;
+        }
+        
+        .navbar-brand img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 0;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+            padding-right: 0;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-nav {
+                padding: 20px 0;
+            }
+        }
+        
+        /* Hero section */
+        .hero-section {
+            padding: 220px 20px 0px;
+            text-align: center;
+            position: relative;
+            background-color: #632863;
+            background-image: url('../images/Background.jpeg');
+            background-size: cover;
+            color: white;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            margin-top: -76px;
+            margin-bottom: 0;
+            background-position: center;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(63, 42, 86, 0.8) 0%,
+                rgba(63, 42, 86, 0.5) 50%,
+                rgba(63, 42, 86, 0) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 11rem;
+            margin-bottom: 50px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            line-height: 1.1;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5),
+                2px 2px 5px rgba(0, 0, 0, 0.7);
+            color: #fffaed;
+            -webkit-text-stroke: 3px rgba(63, 42, 86, 0.9);
+        }
+
+        /* Mobile responsiveness for hero title */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 8rem;
+                -webkit-text-stroke: 2px rgba(63, 42, 86, 0.9);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 6rem;
+                margin-bottom: 30px;
+                -webkit-text-stroke: 2px rgba(63, 42, 86, 0.9);
+            }
+            
+            .hero-section {
+                padding: 180px 15px 140px;
+            }
+            
+            .hero-content p {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 4rem;
+                margin-bottom: 20px;
+                -webkit-text-stroke: 1px rgba(63, 42, 86, 0.9);
+            }
+            
+            .hero-section {
+                padding: 150px 10px 120px;
+            }
+            
+            .hero-content p {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Fire particles layer 1 */
+        .hero-content h1:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -50%; 
+            left: -25%;
+            right: -25%;
+            bottom: -30%;
+            width: 150%;
+            height: 180%;
+            border-radius: 60% 60% 45% 45% / 60% 60% 40% 40%;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(255, 137, 0, 0.95) 0%, rgba(255, 137, 0, 0) 35%),
+                radial-gradient(ellipse at 40% 40%, rgba(255, 199, 0, 0.9) 0%, rgba(255, 199, 0, 0) 40%),
+                radial-gradient(ellipse at 60% 60%, rgba(255, 137, 0, 0.9) 0%, rgba(255, 137, 0, 0) 45%),
+                radial-gradient(ellipse at 80% 40%, rgba(255, 60, 0, 0.9) 0%, rgba(255, 60, 0, 0) 35%),
+                radial-gradient(ellipse at 30% 70%, rgba(255, 199, 0, 0.9) 0%, rgba(255, 199, 0, 0) 40%),
+                radial-gradient(ellipse at 70% 30%, rgba(255, 60, 0, 0.9) 0%, rgba(255, 60, 0, 0) 45%);
+            filter: blur(4px);
+            z-index: -1;
+            animation: fire-move 6s ease-in-out infinite alternate;
+            opacity: 1;
+            mix-blend-mode: screen;
+            transform-origin: center bottom;
+        }
+
+        /* Fire particles layer 2 */
+        .hero-content h1::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -60%;
+            left: -30%;
+            right: -30%;
+            bottom: -35%;
+            width: 160%;
+            height: 195%;
+            border-radius: 70% 70% 50% 50% / 60% 60% 40% 40%;
+            background-image: 
+                radial-gradient(ellipse at 30% 40%, rgba(255, 238, 153, 0.9) 0%, rgba(255, 238, 153, 0) 40%),
+                radial-gradient(ellipse at 50% 30%, rgba(255, 199, 0, 0.8) 0%, rgba(255, 199, 0, 0) 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(255, 137, 0, 0.9) 0%, rgba(255, 137, 0, 0) 45%),
+                radial-gradient(ellipse at 25% 60%, rgba(255, 45, 0, 0.9) 0%, rgba(255, 45, 0, 0) 35%);
+            filter: blur(4px);
+            z-index: -2;
+            animation: fire-dance 8s ease-in-out infinite;
+            opacity: 0.9;
+            mix-blend-mode: screen;
+            transform-origin: center bottom;
+        }
+
+        /* Additional dancing flames */
+        .hero-content h1::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                0deg,
+                #ff2d00 10%, 
+                #ff5a00 25%,
+                #ff8a00 40%,
+                #ffc700 65%,
+                #fffaed 95%
+            );
+            background-size: 100% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: flicker 12s ease-in-out infinite;
+            text-shadow: none;
+        }
+
+        /* Animations */
+        @keyframes fire-move {
+            0% {
+                transform: translateY(0%) scale(1) rotate(0deg);
+                filter: blur(10px) brightness(1);
+                border-radius: 60% 60% 45% 45% / 60% 60% 40% 40%;
+            }
+            25% {
+                border-radius: 65% 55% 50% 40% / 55% 65% 35% 45%;
+            }
+            50% {
+                transform: translateY(-12%) scale(1.1) rotate(1deg); 
+                filter: blur(15px) brightness(1.3);
+                border-radius: 55% 65% 40% 50% / 65% 55% 45% 35%;
+            }
+            75% {
+                border-radius: 60% 60% 45% 45% / 60% 60% 40% 40%;
+            }
+            100% {
+                transform: translateY(0%) scale(1) rotate(-1deg);
+                filter: blur(10px) brightness(1);
+                border-radius: 60% 60% 45% 45% / 60% 60% 40% 40%;
+            }
+        }
+
+        @keyframes fire-dance {
+            0% {
+                transform: translateY(0%) translateX(0%) scale(1) rotate(0deg);
+                filter: blur(12px) brightness(1);
+                border-radius: 70% 70% 50% 50% / 60% 60% 40% 40%;
+            }
+            33% {
+                transform: translateY(-8%) translateX(-5%) scale(1.05) rotate(-2deg);
+                filter: blur(16px) brightness(1.3);
+                border-radius: 65% 75% 45% 55% / 65% 55% 35% 45%;
+            }
+            66% {
+                transform: translateY(-4%) translateX(5%) scale(1.03) rotate(2deg);
+                filter: blur(14px) brightness(1.2);
+                border-radius: 75% 65% 55% 45% / 55% 65% 45% 35%;
+            }
+            100% {
+                transform: translateY(0%) translateX(0%) scale(1) rotate(0deg);
+                filter: blur(12px) brightness(1);
+                border-radius: 70% 70% 50% 50% / 60% 60% 40% 40%;
+            }
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.5; background-position: 0% 0%; }
+            25% { opacity: 0.9; background-position: 0% 15%; }
+            50% { opacity: 0.6; background-position: 0% 30%; }
+            75% { opacity: 0.8; background-position: 0% 45%; }
+            100% { opacity: 0.5; background-position: 0% 0%; }
+        }
+        
+        .hero-content p {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            font-weight: 500;
+            background-color: rgba(63, 42, 86, 0.6); /* More transparent background */
+            padding: 20px 30px;
+            border-radius: 30px; /* Much more rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px); /* Subtle blur effect */
+        }
+        
+        /* Call to action buttons */
+        .cta-btn {
+            background-color: #C6953B;
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            font-size: 1.75rem;
+        }
+        
+        .cta-btn:hover {
+            background-color: #b78531;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #3F2A56;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .footer h6 {
+            color: #C6953B;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #C6953B;
+        }
+
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #C6953B;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .mauticform-button {
+            background-color: #C6953B !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 20px !important;
+            font-weight: bold !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .mauticform-button:hover {
+            background-color: #b78531 !important;
+        }
+
+        /* Card styles */
+        .card {
+            border: 1px solid #4F6070;
+        }
+
+        .card-header {
+            background-color: #59978A;
+            color: white;
+        }
+
+        /* Add card styles */
+        .card {
+            background: rgba(63, 42, 86, 0.1);
+            border: none;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-title {
+            color: #3F2A56;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-text {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .cards-section {
+            padding: 0;
+            margin: 0;
+            background: transparent;
+        }
+        
+        .bluesky-feed-section {
+            padding: 50px 0;
+            margin: 0;
+            margin-top: -1px;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/VIWeb-live/footer-styles.css">
+    <!-- BlueSky Feed Styles -->
+    <link rel="stylesheet" href="/VIWeb-live/styles/styles/bluesky-feed.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/VIWeb-live/Pages/index.html">
+                <img src="/VIWeb-live/images/white-logo.76c7025e.png" alt="Voices Ignited Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/join.html">Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/breaktheice.html">Break The Ice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/support.html">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/VIWeb-live/Pages/shop.html">Shop</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1 data-text="We are Voices Ignited">We are Voices Ignited</h1>
+            <p>At Voices Ignited, we are committed to uniting individuals in the fight against corruption and greed in our government. Our mission transcends political divisions, focusing instead on empowering everyday citizens to stand against those who prioritize power over the public good. Together, we can drive meaningful change and uphold the principles of integrity and accountability in governance.</p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="/VIWeb-live/Pages/join.html" class="btn cta-btn">Join The Movement</a>
+                <a href="/VIWeb-live/Pages/support.html" class="btn cta-btn">Support the Movement</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BlueSky Feed Section -->
+    <section class="bluesky-feed-section">
+        <div class="container">
+            <div id="bluesky-feed"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background-color: #3F2A56; color: white; padding: 20px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@voicesignited" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" aria-label="BlueSky">
+                            <i class="fas fa-cloud"></i>
+                        </a>
+                        <a href="https://voicesignited.substack.com/" target="_blank" aria-label="Substack">
+                            <i class="fas fa-newspaper"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@VoicesIgnited" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.reddit.com/r/VoicesIgnited/" target="_blank" aria-label="Reddit">
+                            <i class="fab fa-reddit"></i>
+                        </a>
+                        <a href="https://linktr.ee/voicesignited" target="_blank" aria-label="Linktree">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                    <p class="mt-3">&copy; 2024 Voices Ignited. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- BlueSky Feed Script -->
+    <script src="/VIWeb-live/scripts/bluesky-feed.js"></script>
+</body>
+</html>

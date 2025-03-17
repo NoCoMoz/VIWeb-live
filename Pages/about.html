@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Voices Ignited</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header styles */
+        .navbar {
+            background-color: #3F2458 !important;
+            padding: 15px 0;
+        }
+
+        .navbar .container {
+            padding: 0;
+            max-width: 100%;
+            margin: 0 30px;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            color: white !important;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #C8953B !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 0;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+            padding-right: 0;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-nav {
+                padding: 20px 0;
+            }
+        }
+        
+        /* Hero section */
+        .hero-section {
+            background: url('../images/CapitolFlag.webp') no-repeat center center;
+            background-size: cover;
+            background-color: #632863;
+            color: white;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            margin-top: -76px; /* Offset for navbar height */
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(62, 38, 100, 0.2); /* Lighter overlay to see more of the image */
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding-top: 100px;
+        }
+        
+        .hero-mission-preview {
+            background-color: rgba(63, 42, 86, 0.8);
+            padding: 1.5rem;
+            border-radius: 8px 8px 0 0;
+            margin-top: auto;
+            max-width: 100%;
+            text-align: left;
+        }
+        
+        .hero-mission-preview h2 {
+            color: #C6953B;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-mission-preview p {
+            color: white;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .read-more-btn {
+            display: inline-block;
+            background-color: #C6953B;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            background-color: #b38632;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        /* Mission statement section */
+        .mission-section {
+            padding: 2rem 0;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 3;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .mission-section::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: url('../images/LogoLarge.PNG') no-repeat center center;
+            background-size: contain;
+            opacity: 0.05;
+            z-index: 1;
+        }
+        
+        .mission-section h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #3F2458;
+            position: relative;
+            z-index: 2;
+            font-weight: 700;
+        }
+        
+        .mission-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+        
+        .mission-content h3 {
+            font-size: 2.2rem;
+            color: #632863;
+            margin: 2rem 0 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid #C6953B;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .mission-content h4 {
+            font-size: 1.8rem;
+            color: #4F6070;
+            margin: 1.5rem 0 0.5rem;
+            font-weight: 600;
+        }
+        
+        .mission-content p {
+            margin-bottom: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .mission-content h3 {
+                font-size: 1.8rem;
+            }
+            
+            .mission-content h4 {
+                font-size: 1.5rem;
+            }
+            
+            .mission-content p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #3F2458;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer h6 {
+            color: #C8953B;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #C8953B;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #C8953B;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mauticform-wrapper {
+            margin: 0;
+        }
+
+        .mauticform-button {
+            background-color: #C8953B !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 20px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .mauticform-button:hover {
+            background-color: #b78531 !important;
+        }
+
+        .btn-primary {
+            background-color: #C8953B;
+            border-color: #C8953B;
+        }
+
+        .btn-primary:hover {
+            background-color: #b78531;
+            border-color: #b78531;
+        }
+
+        /* Card styles */
+        .card {
+            border: 1px solid #4F6070;
+        }
+
+        .card-header {
+            background-color: #59878A;
+            color: white;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="/VIWeb-live/images/white-logo.76c7025e.png" alt="Voices Ignited Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="join.html">Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="BreakTheIce.html">Break The Ice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1>Reclaiming our Government from Corruption</h1>
+            <div class="hero-mission-preview">
+                <h2>Our Mission</h2>
+                <p>Voices Ignited is a multi-faceted organization created by the people, for the people. We believe that every person deserves and holds the inherent right to food, shelter, medical care, and education.</p>
+                <a href="#mission-section" class="read-more-btn">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement Section -->
+    <section class="mission-section" id="mission-section">
+        <div class="container">
+            <h2>Our Mission</h2>
+            <div class="mission-content">
+                <p>Voices Ignited is a multi-faceted organization created by the people, for the people. We believe that every person deserves and holds the inherent right to food, shelter, medical care, and education. We believe it is the duty of our government to ensure basic needs of all citizens are not only met, but prioritized. We deserve and demand a government that works for OUR best interests, and puts the welfare and prosperity of its citizens above all else. Under this cause, we the people have the right to use our voices, granted to us under the Constitution that unites us as one.</p>
+                
+                <h3>Pillars of Action:</h3>
+                
+                <h4>Education and Resources:</h4>
+                <p>Voices Ignited will design a network of educational resources that allow everyone to expand and discuss their knowledge without fear of censorship and supression.</p>
+                
+                <h4>Community Building and Mutual Aid:</h4>
+                <p>Voices Ignited will build communities across the nation to facilitate and promote mutual aid efforts.</p>
+                
+                <h4>Demonstrations and Events:</h4>
+                <p>Voices Ignited will organize and faciliate demonstrations across the nation that will combat govenrment anuse of power and opression of the American people.</p>
+                
+                <h4>Independant Media Production and Journalism:</h4>
+                <p>Voices Ignited will create independent media through various mediums and platforms that reflect the values and opinions of the people.</p>
+                
+                <h4>Uplifting Mraginalized Groups and Communities:</h4>
+                <p>Voices Ignited stands for intersectionality and equality, no expections. We cannot be free unless all of us are free.</p>
+                
+                <h4>Politics and Elections:</h4>
+                <p>Voices Ignited is not about left vs. right, we are about up vs. down; the oligarchy vs. the people. We believe the United States requires a government uncorrupted by greed, and therefore, will work to institute working class Americans into elected positions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="footer-links">
+                        <a href="about.html">About</a>
+                        <a href="join.html">Join</a>
+                        <a href="support.html">Support</a>
+                        <a href="shop.html">Shop</a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="mauticform_wrapper_emaillistfromwebsite" class="mauticform_wrapper">
+                        <form autocomplete="false" role="form" method="post" action="http://134.199.141.110/form/submit?formId=1" id="mauticform_emaillistfromwebsite" data-mautic-form="emaillistfromwebsite" enctype="multipart/form-data">
+                            <div class="mauticform-innerform">
+                                <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                                    <div class="input-group">
+                                        <input id="mauticform_input_emaillistfromwebsite_email" name="mauticform[email]" type="email" class="form-control" placeholder="Stay updated with our newsletter">
+                                        <button type="submit" name="mauticform[submit]" class="mauticform-button btn">Join</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="mauticform[formId]" id="mauticform_emaillistfromwebsite_id" value="1">
+                            <input type="hidden" name="mauticform[return]" id="mauticform_emaillistfromwebsite_return" value="">
+                            <input type="hidden" name="mauticform[formName]" id="mauticform_emaillistfromwebsite_name" value="emaillistfromwebsite">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@voices_united" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank">
+                            <i class="fas fa-cloud"></i>
+                        </a>
+                        <a href="https://voicesignited.substack.com/" target="_blank">
+                            <i class="fas fa-newspaper"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@VoicesIgnited" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 Voices Ignited</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

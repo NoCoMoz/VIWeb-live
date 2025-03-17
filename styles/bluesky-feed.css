@@ -1,0 +1,303 @@
+/* BlueSky Feed Styles */
+/* Using the Voices Ignited color palette */
+
+.bluesky-feed-section {
+    background: linear-gradient(135deg, #3F2A56 0%, #632863 100%);
+    padding: 0;
+    color: white;
+    margin: 0;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+}
+
+.bluesky-feed-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+}
+
+.bluesky-feed-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.bluesky-feed-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #C6953B;
+    border-radius: 3px;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: white;
+}
+
+.loading-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #C6953B;
+}
+
+.error-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #C6953B;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.retry-button {
+    background-color: #C6953B;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+    background-color: #b58632;
+    transform: translateY(-2px);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 1rem 0.5rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #C6953B rgba(255, 255, 255, 0.1);
+}
+
+.posts-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.posts-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.posts-container::-webkit-scrollbar-thumb {
+    background-color: #C6953B;
+    border-radius: 4px;
+}
+
+.bluesky-post {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 3px solid #C6953B;
+    flex: 0 0 300px;
+    min-width: 300px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bluesky-post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.display-name {
+    font-weight: 600;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.handle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.post-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.post-content {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    word-break: break-word;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-post-link {
+    display: inline-flex;
+    align-items: center;
+    color: #C6953B;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    background-color: rgba(198, 149, 59, 0.1);
+}
+
+.view-post-link i {
+    margin-left: 0.5rem;
+}
+
+.view-post-link:hover {
+    color: white;
+    background-color: #C6953B;
+    text-decoration: none;
+}
+
+.post-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 1.5rem 0;
+}
+
+.post-image-container {
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 6px;
+    overflow: hidden;
+    max-height: 200px;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.post-image:hover {
+    transform: scale(1.02);
+}
+
+/* Scroll buttons */
+.scroll-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.scroll-button {
+    background-color: #632863;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.scroll-button:hover {
+    background-color: #C6953B;
+    transform: translateY(-2px);
+}
+
+.scroll-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bluesky-post {
+        flex: 0 0 280px;
+        min-width: 280px;
+    }
+    
+    .post-image-container {
+        max-height: 180px;
+    }
+    
+    .bluesky-feed-container {
+        padding: 1.5rem;
+    }
+    
+    .bluesky-feed-title {
+        font-size: 2rem;
+    }
+    
+    .bluesky-post {
+        padding: 1.25rem;
+    }
+    
+    .post-header {
+        flex-direction: column;
+    }
+    
+    .post-date {
+        margin-top: 0.5rem;
+    }
+    
+    .bluesky-post {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

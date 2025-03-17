@@ -1,0 +1,77 @@
+/* Footer Styles */
+.footer {
+    background-color: #3F2458;
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+
+.footer h6 {
+    color: #C8953B;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: #C8953B;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #C8953B;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mauticform-wrapper {
+    margin: 0;
+}
+
+.mauticform-button {
+    background-color: #C8953B !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.mauticform-button:hover {
+    background-color: #b78531 !important;
+}
