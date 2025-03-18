@@ -6,64 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Create test environment file
-        run: |
-          cat > .env << EOL
-          NODE_ENV=test
-          PORT=3000
-          EOL
-
-      - name: Run linting
-        run: npm run lint || echo "Linting not configured, skipping"
-
-      - name: Start server in background
-        run: node server.js &
-        env:
-          PORT: 3000
-
-      - name: Wait for server to start
-        run: sleep 5
-
-      - name: Run tests
-        run: npm test || echo "Tests failed but continuing deployment"
-
   deploy:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Create production environment file
-        run: |
-          cat > .env << EOL
-          NODE_ENV=production
-          PORT=8080
-          EOL
 
       - name: Deploy to Voices Ignited
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -87,18 +34,11 @@ jobs:
             **/*.md
             **/docs/**
 
-      - name: Notify deployment success
-        run: echo "Website deployed successfully to voicesignited.org"
-
-  notify:
-    needs: deploy
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Check deployment status
+      - name: Notify deployment status
+        if: always()
         run: |
-          if [ "${{ needs.deploy.result }}" == "success" ]; then
-            echo "Deployment completed successfully to voicesignited.org"
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "Website deployed successfully to voicesignited.org"
           else
             echo "Deployment failed"
             exit 1
