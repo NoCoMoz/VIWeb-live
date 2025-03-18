@@ -20,7 +20,7 @@ jobs:
       - name: Deploy to Voices Ignited
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.voicesignited.org
+          server: "162.0.232.112"
           username: Tech@voicesignited.org
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           port: 21
