@@ -1,0 +1,12 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Set the default index file
+DirectoryIndex index.php index.html
+
+# Handle API requests
+RewriteRule ^api/(.*)$ api/$1 [L]
+
+# PHP settings
+php_flag display_errors on
+php_value error_reporting E_ALL

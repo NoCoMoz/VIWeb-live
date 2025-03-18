@@ -3,8 +3,8 @@ const { BskyAgent } = require('@atproto/api');
 const dotenv = require('dotenv');
 const path = require('path');
 
-// Load environment variables from .env.local
-dotenv.config({ path: path.resolve(__dirname, '../../.env.local') });
+// Load environment variables from .env.local or .env
+dotenv.config({ path: path.resolve(__dirname, '../../.env.local') }) || dotenv.config();
 
 // BlueSky credentials from environment variables
 const BLUESKY_USERNAME = process.env.BLUESKY_USERNAME;
@@ -17,6 +17,8 @@ const agent = new BskyAgent({
 
 /**
  * Fetch posts from BlueSky API
+ * @param {string} handle - BlueSky handle to fetch posts from
+ * @param {number} limit - Number of posts to fetch
  * @returns {Promise<Array>} Array of formatted posts
  */
 async function fetchBlueSkyPosts(handle = 'voicesignited.bsky.social', limit = 5) {
@@ -51,9 +53,15 @@ async function fetchBlueSkyPosts(handle = 'voicesignited.bsky.social', limit = 5
     console.log('Fetching posts for handle:', targetHandle);
     
     // Resolve the DID for the handle
-    const resolveResult = await agent.resolveHandle({ handle: targetHandle });
-    if (!resolveResult.success) {
-      console.error('Failed to resolve handle:', targetHandle);
+    let resolveResult;
+    try {
+      resolveResult = await agent.resolveHandle({ handle: targetHandle });
+      if (!resolveResult.success) {
+        console.error('Failed to resolve handle:', targetHandle);
+        return useFallbackPosts();
+      }
+    } catch (resolveError) {
+      console.error('Error resolving handle:', resolveError.message);
       return useFallbackPosts();
     }
     
@@ -61,9 +69,15 @@ async function fetchBlueSkyPosts(handle = 'voicesignited.bsky.social', limit = 5
     console.log('Resolved DID:', did);
     
     // Fetch the profile
-    const profileResult = await agent.getProfile({ actor: did });
-    if (!profileResult.success) {
-      console.error('Failed to fetch profile for DID:', did);
+    let profileResult;
+    try {
+      profileResult = await agent.getProfile({ actor: did });
+      if (!profileResult.success) {
+        console.error('Failed to fetch profile for DID:', did);
+        return useFallbackPosts();
+      }
+    } catch (profileError) {
+      console.error('Error fetching profile:', profileError.message);
       return useFallbackPosts();
     }
     
@@ -71,13 +85,19 @@ async function fetchBlueSkyPosts(handle = 'voicesignited.bsky.social', limit = 5
     console.log('Fetched profile:', profile.displayName);
     
     // Fetch posts from the user's feed
-    const feedResult = await agent.getAuthorFeed({
-      actor: did,
-      limit: limit
-    });
-    
-    if (!feedResult.success) {
-      console.error('Failed to fetch feed for DID:', did);
+    let feedResult;
+    try {
+      feedResult = await agent.getAuthorFeed({
+        actor: did,
+        limit: limit
+      });
+      
+      if (!feedResult.success) {
+        console.error('Failed to fetch feed for DID:', did);
+        return useFallbackPosts();
+      }
+    } catch (feedError) {
+      console.error('Error fetching feed:', feedError.message);
       return useFallbackPosts();
     }
     
@@ -183,6 +203,11 @@ module.exports = (req, res) => {
   const handle = req.query.handle || 'voicesignited.bsky.social';
   const limit = parseInt(req.query.limit) || 5;
   
+  // Set CORS headers to allow access from any origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
   // Fetch posts
   fetchBlueSkyPosts(handle, limit)
     .then(posts => {
@@ -190,6 +215,10 @@ module.exports = (req, res) => {
     })
     .catch(error => {
       console.error('Error in API handler:', error);
-      res.status(500).json(useFallbackPosts());
+      res.status(500).json({
+        error: 'Failed to fetch posts',
+        fallback: true,
+        posts: useFallbackPosts()
+      });
     });
 };
