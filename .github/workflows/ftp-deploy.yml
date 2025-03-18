@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List files to deploy
+        run: |
+          echo "Files to be deployed:"
+          ls -la
+
       - name: Deploy to Voices Ignited
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -19,12 +24,12 @@ jobs:
           username: Tech@voicesignited.org
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           port: 21
-          protocol: ftps-explicit
-          security: loose
-          dangerous-clean-slate: false
-          server-dir: public_html/
+          protocol: ftp
+          log-level: verbose
+          server-dir: /public_html/
+          local-dir: ./
+          state-name: .ftp-deploy-sync-state.json
           dry-run: false
-          timeout: 60000
           exclude: |
             **/.git*
             **/.git*/**
@@ -39,6 +44,12 @@ jobs:
             **/docs/**
             .DS_Store
             Thumbs.db
+
+      - name: Verify deployment
+        if: success()
+        run: |
+          echo "Deployment completed. Please verify at https://voicesignited.org"
+          echo "Timestamp: $(date)"
 
       - name: Notify deployment status
         if: always()
