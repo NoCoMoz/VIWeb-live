@@ -26,7 +26,7 @@ jobs:
           port: 21
           protocol: ftp
           log-level: verbose
-          server-dir: /home/voicylted.org/Tech/
+          server-dir: /public_html/
           local-dir: ./
           state-name: .ftp-deploy-sync-state.json
           dry-run: false
@@ -48,14 +48,14 @@ jobs:
       - name: Verify deployment
         if: success()
         run: |
-          echo "Deployment completed. Please verify at https://voicesignited.org"
+          echo "Deployment completed. Please verify at http://162.0.232.112"
           echo "Timestamp: $(date)"
 
       - name: Notify deployment status
         if: always()
         run: |
           if [ "${{ job.status }}" == "success" ]; then
-            echo "Website deployed successfully to voicesignited.org"
+            echo "Website deployed successfully"
           else
             echo "Deployment failed"
             exit 1
