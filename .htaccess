@@ -11,10 +11,6 @@ RewriteBase /
 # Handle 404 errors
 ErrorDocument 404 /Pages/404.html
 
-# Redirect www to non-www (optional)
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-
 # Protect sensitive files
 <FilesMatch "^\.">
     Order allow,deny
@@ -33,5 +29,8 @@ Header set X-Frame-Options "SAMEORIGIN"
 Header set X-XSS-Protection "1; mode=block"
 Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-# Enable CORS for specific domains if needed
-# Header set Access-Control-Allow-Origin "*"
+# Allow access from IP address
+SetEnvIf Host "^162\.0\.232\.112" ALLOW_DIRECT_IP
+Order Allow,Deny
+Allow from env=ALLOW_DIRECT_IP
+Allow from all
