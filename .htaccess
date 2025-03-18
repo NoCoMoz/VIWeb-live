@@ -11,12 +11,6 @@ RewriteBase /
 # Handle 404 errors
 ErrorDocument 404 /Pages/404.html
 
-# Protect sensitive files
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
 # PHP settings
 php_value upload_max_filesize 64M
 php_value post_max_size 64M
@@ -29,8 +23,7 @@ Header set X-Frame-Options "SAMEORIGIN"
 Header set X-XSS-Protection "1; mode=block"
 Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-# Allow access from IP address
-SetEnvIf Host "^162\.0\.232\.112" ALLOW_DIRECT_IP
-Order Allow,Deny
-Allow from env=ALLOW_DIRECT_IP
+# Allow all access
+Require all granted
+Order allow,deny
 Allow from all
