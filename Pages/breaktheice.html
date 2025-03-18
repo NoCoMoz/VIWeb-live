@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break The Ice - Voices Ignited</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/footer-styles.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header styles */
+        .navbar {
+            background-color: #3F2458 !important;
+            padding: 15px 0;
+        }
+
+        .navbar .container {
+            padding: 0;
+            max-width: 100%;
+            margin: 0 30px;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            color: white !important;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #C8953B !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 500;
+        }
+        
+        /* Break The Ice section */
+        .ice-header {
+            background-color: #632863;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .ice-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .ice-content {
+            padding: 30px 0;
+            background-color: #632863;
+            color: white;
+        }
+        
+        .instructions {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .step {
+            margin-bottom: 10px;
+        }
+        
+        /* Map container */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        /* Search form */
+        .search-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+        
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background-color: #C8953B;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            background-color: #b78531;
+        }
+        
+        /* Footer styles */
+        .footer {
+            background-color: #3F2A56;
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #C6953B;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #C6953B;
+        }
+        
+        .footer-bottom {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .mauticform-button {
+            background-color: #C6953B;
+            color: white;
+            border: none;
+        }
+        
+        .mauticform-button:hover {
+            background-color: #b78531;
+        }
+        
+        /* Card styles */
+        .card {
+            border: 1px solid #4F6070;
+        }
+
+        .card-header {
+            background-color: #59878A;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/white-logo.76c7025e.png" alt="Voices Ignited Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/join">Join</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/break-the-ice">Break The Ice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/support">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop">Shop</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Break The Ice Header -->
+    <header class="ice-header">
+        <div class="container">
+            <h1>Welcome to Break the Ice</h1>
+            <p>This page is for informing people of where I.C.E has been spotted. It allows for you to come in and drop a pin in the location you saw I.C.E. This pin will stay around for 24 hours to help inform others.</p>
+        </div>
+    </header>
+
+    <!-- Instructions Section -->
+    <section class="ice-content">
+        <div class="container">
+            <div class="instructions">
+                <h2>How it Works:</h2>
+                <ol>
+                    <li class="step">Type in the Zip Code of the location you spotted I.C.E in and click Search</li>
+                    <li class="step">Zoom into around the location you saw I.C.E with the arrows at the top left of the map</li>
+                    <li class="step">Drop a pin by clicking the location on the map</li>
+                    <li class="step">If you accidently drop a pin in the wrong location you have 1 minute to delete the pin before its saved</li>
+                </ol>
+            </div>
+
+            <!-- Search Form -->
+            <div class="search-form">
+                <input type="text" class="search-input" placeholder="Enter zip code" id="zipcode">
+                <button class="search-btn">Search</button>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-links">
+                        <a href="/about">About</a>
+                        <a href="/join">Join</a>
+                        <a href="/support">Support</a>
+                        <a href="/shop">Shop</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Stay updated with our newsletter">
+                        <button class="btn">Join</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="social-icons">
+                        <a href="https://www.tiktok.com/@voices_united" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank" aria-label="BlueSky">
+                            <i class="fas fa-cloud"></i>
+                        </a>
+                        <a href="https://voicesignited.substack.com/" target="_blank" aria-label="Substack">
+                            <i class="fas fa-newspaper"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@VoicesIgnited" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.reddit.com/r/VoicesIgnited/" target="_blank" aria-label="Reddit">
+                            <i class="fab fa-reddit-alien"></i>
+                        </a>
+                        <a href="https://linktr.ee/voices_ignited" target="_blank" aria-label="Linktree">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2024 Voices Ignited</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    
+    <!-- Map Initialization Script -->
+    <script>
+        // Initialize the map centered on Washington DC
+        var map = L.map('map').setView([38.9072, -77.0369], 11);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Variables to store markers
+        var markers = [];
+        var tempMarker = null;
+        var deleteTimeout;
+        
+        // Add click event to the map for dropping pins
+        map.on('click', function(e) {
+            // If there's already a temporary marker, remove it
+            if (tempMarker) {
+                map.removeLayer(tempMarker);
+                clearTimeout(deleteTimeout);
+            }
+            
+            // Create a new marker at the clicked location
+            tempMarker = L.marker(e.latlng).addTo(map);
+            tempMarker.bindPopup("ICE sighting reported. Click to remove (available for 1 minute)").openPopup();
+            
+            // Allow deletion for 1 minute
+            tempMarker.on('click', function() {
+                map.removeLayer(tempMarker);
+                tempMarker = null;
+                clearTimeout(deleteTimeout);
+            });
+            
+            // After 1 minute, make the marker permanent
+            deleteTimeout = setTimeout(function() {
+                if (tempMarker) {
+                    tempMarker.unbindPopup();
+                    tempMarker.bindPopup("ICE sighting reported");
+                    markers.push(tempMarker);
+                    tempMarker = null;
+                }
+            }, 60000); // 1 minute in milliseconds
+        });
+        
+        // Search button functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            var zipcode = document.getElementById('zipcode').value.trim();
+            if (zipcode) {
+                // In a real application, you would have an API to convert zipcode to coordinates
+                // For this demo, we'll just simulate a search by moving to a random location near DC
+                var lat = 38.9072 + (Math.random() - 0.5) * 0.1;
+                var lng = -77.0369 + (Math.random() - 0.5) * 0.1;
+                map.setView([lat, lng], 14);
+            }
+        });
+    </script>
+</body>
+</html>

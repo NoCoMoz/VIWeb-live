@@ -1,0 +1,23 @@
+name: Deploy to Namecheap Hosting
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: premium136.web-hosting.com
+          username: voicylda
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/voicylda/public_html
+            if [ -d ".git" ]; then
+              git pull
+            else
+              git clone https://github.com/${{ github.repository }}.git .
+            fi

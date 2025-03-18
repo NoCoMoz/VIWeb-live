@@ -1,0 +1,120 @@
+// Upcoming Events Component Styles
+
+.upcoming-events {
+  margin: 2rem 0;
+
+  .section-title {
+    color: #3F2A56;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #C6953B;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  .no-events {
+    text-align: center;
+    font-style: italic;
+    color: #4F6070;
+    margin: 2rem 0;
+  }
+
+  .events-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .event-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #59978A;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .event-title {
+    color: #3F2A56;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .event-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    background-color: #59978A;
+
+    &.protest {
+      background-color: #C6953B;
+    }
+
+    &.workshop {
+      background-color: #4F6070;
+    }
+
+    &.meeting {
+      background-color: #632863;
+    }
+  }
+
+  .event-description {
+    color: #4F6070;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .event-details {
+    margin-bottom: 1rem;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: #4F6070;
+
+    svg {
+      color: #C6953B;
+      margin-right: 0.75rem;
+      width: 16px;
+    }
+  }
+
+  .event-organizer {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #4F6070;
+  }
+
+  .event-image {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 1rem;
+    object-fit: cover;
+  }
+}

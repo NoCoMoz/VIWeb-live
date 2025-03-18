@@ -1,0 +1,136 @@
+<!-- Footer Styles - Add this in the <head> section -->
+<style>
+    /* Footer Styles */
+    .footer {
+        background-color: #3e2664;
+        color: white;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+
+    .footer h6 {
+        color: #d6a339;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+        color: #d6a339;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: flex-end;
+    }
+
+    .social-icons a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+        color: #d6a339;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1rem;
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .mauticform-wrapper {
+        margin: 0;
+    }
+
+    .mauticform-button {
+        background-color: #d6a339 !important;
+        color: white !important;
+        border: none !important;
+        padding: 8px 20px !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mauticform-button:hover {
+        background-color: #c19430 !important;
+    }
+</style>
+
+<!-- Font Awesome - Add this in the <head> section -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<!-- Footer HTML - Add this before closing </body> tag -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div class="footer-links">
+                    <a href="Pages/about.html">About</a>
+                    <a href="Pages/join.html">Join</a>
+                    <a href="Pages/breaktheice.html">Break The Ice</a>
+                    <a href="Pages/support.html">Support</a>
+                    <a href="Pages/shop.html">Shop</a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div id="mauticform_wrapper_emaillistfromwebsite" class="mauticform_wrapper">
+                    <form autocomplete="false" role="form" method="post" action="http://134.199.141.110/form/submit?formId=1" id="mauticform_emaillistfromwebsite" data-mautic-form="emaillistfromwebsite" enctype="multipart/form-data">
+                        <div class="mauticform-innerform">
+                            <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                                <div class="input-group">
+                                    <input id="mauticform_input_emaillistfromwebsite_email" name="mauticform[email]" type="email" class="form-control" placeholder="Stay updated with our newsletter">
+                                    <button type="submit" name="mauticform[submit]" class="mauticform-button btn">Join</button>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="mauticform[formId]" id="mauticform_emaillistfromwebsite_id" value="1">
+                        <input type="hidden" name="mauticform[return]" id="mauticform_emaillistfromwebsite_return" value="">
+                        <input type="hidden" name="mauticform[formName]" id="mauticform_emaillistfromwebsite_name" value="emaillistfromwebsite">
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@voices_united" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://bsky.app/profile/voicesignited.bsky.social" target="_blank">
+                        <i class="fas fa-cloud"></i>
+                    </a>
+                    <a href="https://voicesignited.substack.com/" target="_blank">
+                        <i class="fas fa-newspaper"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@VoicesIgnited" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="mb-0">&copy; 2024 Voices Ignited</p>
+        </div>
+    </div>
+</footer>
