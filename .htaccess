@@ -1,9 +1,6 @@
 # Enable PHP execution
 AddHandler application/x-httpd-php .php
 
-# Set default index files
-DirectoryIndex index.php index.html
-
 # Enable URL rewriting
 RewriteEngine On
 RewriteBase /
@@ -23,7 +20,30 @@ Header set X-Frame-Options "SAMEORIGIN"
 Header set X-XSS-Protection "1; mode=block"
 Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-# Allow all access
-Require all granted
-Order allow,deny
-Allow from all
+Options +FollowSymLinks
+
+# Allow access to all files
+<Files *>
+    Order Allow,Deny
+    Allow from all
+    Require all granted
+</Files>
+
+# Set default directory permissions
+<Directory />
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+# Set default index files
+DirectoryIndex index.html index.php
+
+# Set proper MIME types
+AddType application/javascript .js
+AddType text/css .css
+AddType image/svg+xml .svg
+AddType application/json .json
+
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"

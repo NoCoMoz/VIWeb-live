@@ -7,7 +7,7 @@ const config = {
     host: "162.0.232.112",
     port: 21,
     localRoot: __dirname,
-    remoteRoot: "/home/voicylda/public_html/",
+    remoteRoot: "/public_html/",
     include: ["*", "**/*"],
     exclude: [
         "**/.git/**",
