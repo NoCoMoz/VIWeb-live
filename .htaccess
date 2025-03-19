@@ -1,49 +1,20 @@
-# Enable PHP execution
-AddHandler application/x-httpd-php .php
-
-# Enable URL rewriting
-RewriteEngine On
-RewriteBase /
-
-# Handle 404 errors
-ErrorDocument 404 /Pages/404.html
-
-# PHP settings
-php_value upload_max_filesize 64M
-php_value post_max_size 64M
-php_value max_execution_time 300
-php_value max_input_time 300
-
-# Security headers
-Header set X-Content-Type-Options "nosniff"
-Header set X-Frame-Options "SAMEORIGIN"
-Header set X-XSS-Protection "1; mode=block"
-Header set Referrer-Policy "strict-origin-when-cross-origin"
-
+# Basic Apache Configuration
 Options +FollowSymLinks
+RewriteEngine On
 
 # Allow access to all files
 <Files *>
     Order Allow,Deny
     Allow from all
-    Require all granted
 </Files>
-
-# Set default directory permissions
-<Directory />
-    Options FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
 
 # Set default index files
 DirectoryIndex index.html index.php
 
-# Set proper MIME types
-AddType application/javascript .js
-AddType text/css .css
-AddType image/svg+xml .svg
-AddType application/json .json
+# Basic security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
 
-# Enable CORS
-Header set Access-Control-Allow-Origin "*"
+# Allow all access
+Require all granted
